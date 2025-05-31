@@ -2,7 +2,7 @@ const platosModel = require('../models/platosModel');
 
 async function listarPlatos(req, res) {
   try {
-    const platos = await platosModel.getAllPlatos();
+    const platos = await platosModel.getPlatos();
     res.json(platos);
   } catch (err) {
     console.error(err);

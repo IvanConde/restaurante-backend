@@ -1,6 +1,6 @@
 const db = require('../db/database');
 
-async function getAllPlatos() {
+async function getPlatos() {
   const [rows] = await db.query('SELECT * FROM platos WHERE disponible = 1');
   return rows;
 }
@@ -43,7 +43,7 @@ async function deletePlato(id) {
 }
 
 module.exports = {
-  getAllPlatos,
+  getPlatos,
   createPlato,
   updatePlato,
   deletePlato

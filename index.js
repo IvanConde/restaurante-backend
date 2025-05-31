@@ -17,6 +17,9 @@ app.get('/', (req, res) => {
 const platosRoutes = require('./routes/platosRoutes');
 app.use('/api/platos', platosRoutes);
 
+const usuariosRoutes = require('./routes/usuariosRoutes');
+app.use('/api/usuarios', usuariosRoutes);
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
