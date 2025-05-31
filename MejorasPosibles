@@ -1,0 +1,2 @@
+1. En el get all, tenemos que tener alguna especie de filtro, podriamos mantener como ahora traer todos los disponibles y filtrar con logica en el back end.
+2. En el PUT (update) de platos, podriamos permitir actualizar ciertos valores pero no todos necesariamente, habria q ver como.
