@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { crearUsuarioAdminSiNoExiste } = require('./db/initData');
 require('dotenv').config();
 
 const app = express();
@@ -8,6 +9,7 @@ app.use(express.json());
 
 // DB init
 require('./db/database');
+crearUsuarioAdminSiNoExiste(); // Ejecuta el chequeo y creación
 
 // Rutas
 app.get('/', (req, res) => {
@@ -19,6 +21,9 @@ app.use('/api/platos', platosRoutes);
 
 const usuariosRoutes = require('./routes/usuariosRoutes');
 app.use('/api/usuarios', usuariosRoutes);
+
+const loginRoutes = require('./routes/loginRoutes');
+app.use('/api/login', loginRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

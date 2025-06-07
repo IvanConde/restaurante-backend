@@ -1,8 +1,10 @@
 const platosModel = require('../models/platosModel');
+const auditoria = require('../models/auditoriaModel');
 
 async function listarPlatos(req, res) {
   try {
-    const platos = await platosModel.getPlatos();
+    const filtros = req.query;
+    const platos = await platosModel.getPlatos(filtros);
     res.json(platos);
   } catch (err) {
     console.error(err);
@@ -28,6 +30,13 @@ async function crearPlato(req, res) {
       categoria,
     });
 
+    await auditoria.registrarAccion({
+      usuario_id: req.usuario.id,
+      accion: `Creo el plato con id ${nuevoId}`,
+      entidad: 'plato',
+      entidad_id: nuevoId
+    });
+
     res.status(201).json({ mensaje: 'Plato creado', id: nuevoId });
   } catch (err) {
     console.error(err);
@@ -38,6 +47,11 @@ async function crearPlato(req, res) {
 async function modificarPlato(req, res) {
   const id = parseInt(req.params.id);
   const camposPermitidos = ['nombre', 'descripcion', 'alergenos', 'precio', 'disponible', 'categoria'];
+
+  const bodyId = req.body.id;
+  if (bodyId !== undefined && parseInt(bodyId) !== id) {
+    return res.status(400).json({ error: 'No se puede modificar el ID del plato' });
+  }
 
   // Filtrar solo los campos válidos
   const camposActualizados = {};
@@ -55,6 +69,12 @@ async function modificarPlato(req, res) {
     const actualizado = await platosModel.updatePlato(id, camposActualizados);
 
     if (actualizado) {
+      await auditoria.registrarAccion({
+        usuario_id: req.usuario.id,
+        accion: `Modificó el plato con id ${id}`,
+        entidad: 'plato',
+        entidad_id: id
+      });
       res.json({ mensaje: 'Plato actualizado correctamente' });
     } else {
       res.status(404).json({ error: 'Plato no encontrado' });
@@ -72,6 +92,12 @@ async function eliminarPlato(req, res) {
     const eliminado = await platosModel.deletePlato(id);
 
     if (eliminado) {
+      await auditoria.registrarAccion({
+        usuario_id: req.usuario.id,
+        accion: `Eliminó el plato con id ${id}`,
+        entidad: 'plato',
+        entidad_id: id
+      });
       res.json({ mensaje: 'Plato eliminado (lógicamente)' });
     } else {
       res.status(404).json({ error: 'Plato no encontrado' });

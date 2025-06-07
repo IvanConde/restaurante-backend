@@ -1,5 +1,6 @@
 const usuariosModel = require('../models/usuariosModel');
 const bcrypt = require('bcryptjs');
+const auditoria = require('../models/auditoriaModel');
 
 async function crearUsuario(req, res) {
   try {
@@ -17,6 +18,13 @@ async function crearUsuario(req, res) {
       password: passwordHasheada,
     });
 
+    await auditoria.registrarAccion({
+      usuario_id: req.usuario.id,
+      accion: `Creo el usuario con id ${nuevoId}`,
+      entidad: 'usuario',
+      entidad_id: nuevoId
+    });
+
     res.status(201).json({ mensaje: 'Usuario creado', id: nuevoId });
   } catch (err) {
     console.error(err);
@@ -30,7 +38,8 @@ async function crearUsuario(req, res) {
 
 async function listarUsuarios(req, res) {
   try {
-    const usuarios = await usuariosModel.getUsuarios();
+    const filtros = req.query;
+    const usuarios = await usuariosModel.getUsuarios(filtros);
     res.json(usuarios);
   } catch (err) {
     console.error(err);
@@ -41,6 +50,11 @@ async function listarUsuarios(req, res) {
 async function modificarUsuario(req, res) {
   const id = parseInt(req.params.id);
   const camposPermitidos = ['nombre', 'password', 'activo'];
+
+  const bodyId = req.body.id;
+  if (bodyId !== undefined && parseInt(bodyId) !== id) {
+    return res.status(400).json({ error: 'No se puede modificar el ID del Usuario' });
+  }
 
   const camposActualizados = {};
   for (const campo of camposPermitidos) {
@@ -63,6 +77,12 @@ async function modificarUsuario(req, res) {
     const actualizado = await usuariosModel.updateUsuario(id, camposActualizados);
 
     if (actualizado) {
+      await auditoria.registrarAccion({
+        usuario_id: req.usuario.id,
+        accion: `Modificó el usuario con id ${id}`,
+        entidad: 'usuario',
+        entidad_id: id
+      });
       res.json({ mensaje: 'Usuario actualizado correctamente' });
     } else {
       res.status(404).json({ error: 'Usuario no encontrado' });
@@ -80,6 +100,12 @@ async function eliminarUsuario(req, res) {
     const eliminado = await usuariosModel.deleteUsuario(id);
 
     if (eliminado) {
+      await auditoria.registrarAccion({
+        usuario_id: req.usuario.id,
+        accion: `Eliminó el usuario con id ${id}`,
+        entidad: 'usuario',
+        entidad_id: id
+      });
       res.json({ mensaje: 'Usuario eliminado (lógicamente)' });
     } else {
       res.status(404).json({ error: 'Usuario no encontrado' });

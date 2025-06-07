@@ -1,1 +1,2 @@
-1. En el get all, tenemos que tener alguna especie de filtro, podriamos mantener como ahora traer todos los disponibles y filtrar con logica en el back end.
+Ahora mismo en los get nos traemos TODO, este activo o no en la db.
+Ej todos los platos y no solo los que tienen disponible en true, eso se filtraria en el front

@@ -1,7 +1,35 @@
 const db = require('../db/database');
 
-async function getPlatos() {
-  const [rows] = await db.query('SELECT * FROM platos WHERE disponible = 1');
+async function getPlatos({ nombre, precioMin, precioMax, disponible, categoria }) {
+  let sql = `SELECT * FROM platos WHERE 1=1`;
+  const params = [];
+
+  if (nombre) {
+    sql += ` AND nombre LIKE ?`;
+    params.push(`%${nombre}%`);
+  }
+
+  if (precioMin) {
+    sql += ` AND precio >= ?`;
+    params.push(Number(precioMin));
+  }
+
+  if (precioMax) {
+    sql += ` AND precio <= ?`;
+    params.push(Number(precioMax));
+  }
+
+  if (disponible !== undefined) {
+    sql += ` AND disponible = ?`;
+    params.push(disponible === 'true' ? 1 : 0);
+  }
+
+  if (categoria) {
+    sql += ` AND categoria = ?`;
+    params.push(categoria);
+  }
+
+  const [rows] = await db.query(sql, params);
   return rows;
 }
 

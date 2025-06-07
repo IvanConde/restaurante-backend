@@ -9,10 +9,21 @@ async function createUsuario({ nombre, password}) {
   return result.insertId;
 }
 
-async function getUsuarios() {
-  const [rows] = await db.query(
-    `SELECT id, nombre FROM usuarios WHERE activo = 1`
-  );
+async function getUsuarios({ nombre, activo }) {
+  let sql = `SELECT id, nombre, activo FROM usuarios WHERE 1=1`;
+  const params = [];
+
+  if (nombre) {
+    sql += ` AND nombre LIKE ?`;
+    params.push(`%${nombre}%`);
+  }
+
+  if (activo !== undefined) {
+    sql += ` AND activo = ?`;
+    params.push(activo === 'true' ? 1 : 0);
+  }
+
+  const [rows] = await db.query(sql, params);
   return rows;
 }
 
