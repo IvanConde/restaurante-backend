@@ -1,2 +1,14 @@
-Ahora mismo en los get nos traemos TODO, este activo o no en la db.
-Ej todos los platos y no solo los que tienen disponible en true, eso se filtraria en el front
+Con la implementacion actual, al crear un plato no se acepta la imagen
+lo que se hace es, crear el plato con todos sus campos, sin la foto
+y luego de creado, se llama al endpoint de imagen que lo que hace es editar con el id dado
+ese registro en la db, y agregar la url de imagen
+entonces por ejemplo, desde el front, cuando el usuario quiere crear un plato ya con la imagen es
+llamamos al endpoint de back de crear plato, eso devuelve el id del plato creado
+e inmediatamente se llama al endpoint de imagen, que le pasamos el id del plato y modifica ese campo en la db
+y pone la foto (la url)
+luego el front al leer los platos en el menu, leera la url de la columna imagen y la cargara de ahi
+
+para actualizar la imagen de una foto
+desde el front el usuario quiere actualizar la foto y algo mas, o solo la foto
+llamamos a la api, al endpoint de imagen y le pasamos el id del plato a modificar
+a eso le pasamos la foto y listo

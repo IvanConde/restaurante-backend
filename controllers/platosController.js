@@ -108,9 +108,31 @@ async function eliminarPlato(req, res) {
   }
 }
 
+async function actualizarImagen(req, res) {
+  const id = parseInt(req.params.id);
+  const imagenUrl = req.file.path;
+
+  try {
+    await platosModel.updatePlato(id, { imagen: imagenUrl });
+
+    await auditoria.registrarAccion({
+      usuario_id: req.usuario.id,
+      accion: `Se actualizo la imagen del plato con id ${id}`,
+      entidad: 'plato',
+      entidad_id: id
+    });
+
+    res.json({ mensaje: 'Imagen subida correctamente', url: imagenUrl });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al subir la imagen' });
+  }
+}
+
 module.exports = {
   listarPlatos,
   crearPlato,
   modificarPlato,
-  eliminarPlato
+  eliminarPlato,
+  actualizarImagen
 };
