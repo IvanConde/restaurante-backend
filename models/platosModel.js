@@ -1,6 +1,6 @@
 const db = require('../db/database');
 
-async function getPlatos({ nombre, precioMin, precioMax, disponible, categoria }) {
+async function getPlatos({ nombre, precioMin, precioMax, disponible, categoria, subcategoria }) {
   let sql = `SELECT * FROM platos WHERE 1=1`;
   const params = [];
 
@@ -29,15 +29,20 @@ async function getPlatos({ nombre, precioMin, precioMax, disponible, categoria }
     params.push(categoria);
   }
 
+  if (subcategoria) {
+    sql += ` AND subcategoria = ?`;
+    params.push(subcategoria);
+  }
+
   const [rows] = await db.query(sql, params);
   return rows;
 }
 
-async function createPlato({ nombre, descripcion, alergenos, precio, disponible, categoria }) {
+async function createPlato({ nombre, descripcion, alergenos, precio, disponible, categoria, subcategoria }) {
   const [result] = await db.query(
-    `INSERT INTO platos (nombre, descripcion, alergenos, precio, disponible, categoria)
+    `INSERT INTO platos (nombre, descripcion, alergenos, precio, disponible, categoria, subcategoria)
      VALUES (?, ?, ?, ?, ?, ?)`,
-    [nombre, descripcion, alergenos, precio, disponible, categoria]
+    [nombre, descripcion, alergenos, precio, disponible, categoria, subcategoria]
   );
   return result.insertId;
 }

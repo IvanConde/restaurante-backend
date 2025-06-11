@@ -14,7 +14,7 @@ async function listarPlatos(req, res) {
 
 async function crearPlato(req, res) {
   try {
-    const { nombre, descripcion, alergenos, precio, disponible, categoria } = req.body;
+    const { nombre, descripcion, alergenos, precio, disponible, categoria, subcategoria } = req.body;
 
     // Validación mínima
     if (!nombre || !precio || !categoria) {
@@ -28,6 +28,7 @@ async function crearPlato(req, res) {
       precio,
       disponible: disponible !== undefined ? disponible : true,
       categoria,
+      subcategoria,
     });
 
     await auditoria.registrarAccion({
@@ -46,7 +47,7 @@ async function crearPlato(req, res) {
 
 async function modificarPlato(req, res) {
   const id = parseInt(req.params.id);
-  const camposPermitidos = ['nombre', 'descripcion', 'alergenos', 'precio', 'disponible', 'categoria'];
+  const camposPermitidos = ['nombre', 'descripcion', 'alergenos', 'precio', 'disponible', 'categoria', 'subcategoria'];
 
   const bodyId = req.body.id;
   if (bodyId !== undefined && parseInt(bodyId) !== id) {
