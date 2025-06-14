@@ -41,7 +41,7 @@ async function getPlatos({ nombre, precioMin, precioMax, disponible, categoria, 
 async function createPlato({ nombre, descripcion, alergenos, precio, disponible, categoria, subcategoria }) {
   const [result] = await db.query(
     `INSERT INTO platos (nombre, descripcion, alergenos, precio, disponible, categoria, subcategoria)
-     VALUES (?, ?, ?, ?, ?, ?)`,
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
     [nombre, descripcion, alergenos, precio, disponible, categoria, subcategoria]
   );
   return result.insertId;
