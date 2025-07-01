@@ -1,13 +1,13 @@
 INSERT INTO platos (nombre, descripcion, alergenos, precio, disponible, imagen, categoria, subcategoria) VALUES
 -- Entrantes
-('Tartar de Salmón', 'Salmón fresco con aguacate y caviar negro.', 'Pescado, Moluscos, Lácteos', 20000, 1, 'src/assets/Imagenes/entrantes/tartarDeSalmon.jpg', 'Entrantes', null),
-('Carpaccio de Trufa', 'Finas láminas de res con aceite de trufa y parmesano.', 'Lácteos', 16500, 1, 'src/assets/Imagenes/entrantes/carpaccioDeRes.jpg', 'Entrantes', null),
-('Burrata', 'Burrata cremosa con tomates y vinagreta balsámico.', 'Lácteos', 16500, 1, 'src/assets/Imagenes/entrantes/burrata.jpg', 'Entrantes', null),
+('Tarta de Salmón', 'Salmón fresco con aguacate y caviar negro.', 'Pescado, Moluscos, Lácteos', 20000, 1, 'src/assets/Imagenes/entrantes/tartarDeSalmon.jpg', 'Entrantes', 'General'),
+('Carpaccio de Trufa', 'Finas láminas de res con aceite de trufa y parmesano.', 'Lácteos', 16500, 1, 'src/assets/Imagenes/entrantes/carpaccioDeRes.jpg', 'Entrantes', 'General'),
+('Burrata', 'Burrata cremosa con tomates y vinagreta balsámico.', 'Lácteos', 16500, 1, 'src/assets/Imagenes/entrantes/burrata.jpg', 'Entrantes', 'General'),
 
 -- Ensaladas
-('Langosta y Pomelo', 'Langosta, pomelo y vinagreta de miel y mostaza.', 'Mariscos, Mostaza', 22500, 1, 'src/assets/Imagenes/ensaladas/ensaladaLangostaPomelo.jpg', 'Ensaladas', null),
-('Quinoa y Granada', 'Quinoa, verduras asadas y semillas de granada.', 'Ninguno', 16500, 1, 'src/assets/Imagenes/ensaladas/quinoaGranada.jpg', 'Ensaladas', null),
-('Capresse', 'Tomates frescos, mozzarella de búfala, y albahaca.', 'Lácteos', 18500, 1, 'src/assets/Imagenes/ensaladas/capresse.jpg', 'Ensaladas', null),
+('Langosta y Pomelo', 'Langosta, pomelo y vinagreta de miel y mostaza.', 'Mariscos, Mostaza', 22500, 1, 'src/assets/Imagenes/ensaladas/ensaladaLangostaPomelo.jpg', 'Ensaladas', 'General'),
+('Quinoa y Granada', 'Quinoa, verduras asadas y semillas de granada.', 'Ninguno', 16500, 1, 'src/assets/Imagenes/ensaladas/quinoaGranada.jpg', 'Ensaladas', 'General'),
+('Capresse', 'Tomates frescos, mozzarella de búfala, y albahaca.', 'Lácteos', 18500, 1, 'src/assets/Imagenes/ensaladas/capresse.jpg', 'Ensaladas', 'General'),
 
 -- Carnes rojas
 ('Filete de Res', 'Filete de res con salsa de vino tinto y puré de trufas.', 'Lácteos, Sulfitos', 36500, 1, 'src/assets/Imagenes/Platos/fileteDeRes.jpg', 'Platos', 'Carnes rojas'),
@@ -26,9 +26,9 @@ INSERT INTO platos (nombre, descripcion, alergenos, precio, disponible, imagen, 
 ('Ravioli Ricotta y Espinaca', 'Ravioli con salsa de mantequilla y salvia.', 'Gluten, Lácteos', 21500, 1, 'src/assets/Imagenes/Pastas/ravioli.jpg', 'Platos', 'Pastas'),
 
 -- Postres
-('Mousse Chocolate', 'Mousse de chocolate con frambuesas frescas.', 'Lácteos, Soja', 15500, 1, 'src/assets/Imagenes/Postres/mouseChocolate.jpg', 'Postres', null),
-('Lemon Pie', 'Tarta de limón con base de almendra.', 'Gluten, Frutos secos, Lácteos', 13500, 1, 'src/assets/Imagenes/Postres/lemonPie.jpg', 'Postres', null),
-('Macarons de Pistacho y Frambuesa', 'Macarons rellenos de pistacho y frambuesa.', 'Lácteos', 12200, 1, 'src/assets/Imagenes/Postres/macarronesPistacchio.jpg', 'Postres', null),
+('Mousse Chocolate', 'Mousse de chocolate con frambuesas frescas.', 'Lácteos, Soja', 15500, 1, 'src/assets/Imagenes/Postres/mouseChocolate.jpg', 'Postres', 'General'),
+('Lemon Pie', 'Tarta de limón con base de almendra.', 'Gluten, Frutos secos, Lácteos', 13500, 1, 'src/assets/Imagenes/Postres/lemonPie.jpg', 'Postres', 'General'),
+('Macarons de Pistacho y Frambuesa', 'Macarons rellenos de pistacho y frambuesa.', 'Lácteos', 12200, 1, 'src/assets/Imagenes/Postres/macarronesPistacchio.jpg', 'Postres', 'General'),
 
 -- Bebidas con alcohol
 ('Atelier Martini', 'Gin, vermouth seco y esencia cítrica artesana.', 'Ninguno', 10500, 1, 'src/assets/Imagenes/Tragos/atelierMartini.jpg', 'Bebidas', 'Con alcohol'),

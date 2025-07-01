@@ -7,5 +7,5 @@ CREATE TABLE platos (
   disponible BOOLEAN DEFAULT TRUE,
   categoria varchar(50) NOT NULL,
   imagen varchar(500),
-  subcategoria varchar(50)
+  subcategoria varchar(50) DEFAULT 'General'
 );
