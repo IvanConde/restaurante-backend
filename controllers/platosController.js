@@ -28,7 +28,7 @@ async function crearPlato(req, res) {
       precio,
       disponible: disponible !== undefined ? disponible : true,
       categoria,
-      subcategoria,
+      subcategoria: subcategoria !== undefined ? subcategoria : "General",
     });
 
     await auditoria.registrarAccion({
