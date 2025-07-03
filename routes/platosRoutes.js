@@ -5,7 +5,7 @@ const verificarToken = require('../middlewares/authMiddleware');
 const upload = require('../middlewares/upload');
 
 router.post('/', verificarToken, platosController.crearPlato);
-router.get('/', verificarToken, platosController.listarPlatos);
+router.get('/', platosController.listarPlatos);
 router.put('/:id', verificarToken, platosController.modificarPlato);
 router.delete('/:id', verificarToken, platosController.eliminarPlato);
 
