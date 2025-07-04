@@ -20,6 +20,10 @@ async function crearPlato(req, res) {
     if (!nombre || !precio || !categoria) {
       return res.status(400).json({ error: 'Faltan datos obligatorios' });
     }
+    
+    if (precio <= 0) {
+      return res.status(400).json({ error: 'El precio debe ser mayor o igual a cero' });
+    }
 
     const nuevoId = await platosModel.createPlato({
       nombre,
@@ -64,6 +68,10 @@ async function modificarPlato(req, res) {
 
   if (Object.keys(camposActualizados).length === 0) {
     return res.status(400).json({ error: 'No se enviaron campos válidos para actualizar' });
+  }
+
+  if (camposActualizados.precio <= 0) {
+    return res.status(400).json({ error: 'El precio debe ser mayor o igual a cero' });
   }
 
   try {
